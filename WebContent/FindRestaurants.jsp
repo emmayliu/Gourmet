@@ -45,13 +45,13 @@
                 <th>RestaurantName</th>
                 <th>CreditCard</th>
                 <th>WIFI</th>
-                <th>ReviewCount</th>
                 <th>PriceRange</th>
                 <th>OpenTime</th>
                 <th>CloseTime</th>
                 <th>NoiseLevel</th>
                 <th>Neighborhood</th>
                 <th>Star</th>
+                <th>Parking</th>
                 <th>Street</th>
                 <th>City</th>
                 <th>State</th>
@@ -68,6 +68,8 @@
 					<td><fmt:formatDate value="${rest.getClose()}" pattern="hh:mm:ss"/></td>
 					<td><c:out value="${rest.getNoiseLevel()}" /></td>
 					<td><c:out value="${rest.getNeighborhood()}" /></td>
+					<td><c:out value="${rest.getStar()}" /></td>
+					<td><c:out value="${rest.getParking()}" /></td>
 					<td><c:out value="${rest.getStreet()}" /></td>
 					<td><c:out value="${rest.getCity()}" /></td>
 					<td><c:out value="${rest.getState()}" /></td>
@@ -76,6 +78,6 @@
                     <td><a href="restaurantupdate?restaurantId=<c:out value="${rest.getRestaurantId()}"/>">Update</a></td>
 				</tr>
 			</c:forEach>
-		</table>
+		</table>   
 </body>
 </html>
