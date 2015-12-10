@@ -1,0 +1,50 @@
+@import url('http://fonts.googleapis.com/css?family=Amarante');
+
+#keywords {
+  margin: 0 auto;
+  font-size: 1.0em;
+  margin-bottom: 15px;
+}
+
+#keywords thead {
+  cursor: pointer;
+  background: #050606;
+    opacity: 0.5;
+}
+#keywords thead tr th { 
+  font-weight: bold;
+  padding: 2px 3px;
+  padding-left: 12px;
+    color: #ffffff;
+}
+#keywords thead tr th span { 
+  padding-right: 5px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+}
+
+#keywords thead tr th.headerSortUp, #keywords thead tr th.headerSortDown {
+  background: #1a060a;
+  opacity: 0.9;
+}
+
+#keywords thead tr th.headerSortUp span {
+  background-image: url('http://i.imgur.com/SP99ZPJ.png');
+}
+#keywords thead tr th.headerSortDown span {
+  background-image: url('http://i.imgur.com/RkA9MBo.png');
+}
+
+
+#keywords tbody tr { 
+  color: #ffffff;
+}
+#keywords tbody tr td {
+  text-align: center;
+  padding: 15px 10px;
+  background: #1a1a25;
+   opacity: 0.5;
+}
+#keywords tbody tr td.lalign {
+  text-align: left;
+}
