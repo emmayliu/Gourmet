@@ -1,77 +1,99 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-    pageEncoding="US-ASCII"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gourmet Restaurant Review</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath} css/bootstrap.css">
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<script src="js/jquery.min.js"></script>
-<link href='//fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-
-<script>
-$(document).ready(function(c) {
-	$('.alert-close').on('click', function(c){
-		$('.vlcone').fadeOut('slow', function(c){
-			$('.vlcone').remove();
-		});
-	});	  
-});
-</script>
-<!-- //script for close -->
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/table.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/navigation.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/fonts.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/fontFace.css" type="text/css" media="all" />
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="script.js"></script>
 </head>
 <body>
-<div class="main" >
-	<h1>GOURMET RESTAURANT</h1>
-	
-	<div class="hotel-right  vlcone">
-		<div class="alert-close"> </div>
-		<div class="pay-form">
-		<img src="${pageContext.request.contextPath} images/body-bg.jpg" />	
-			<form>
-				<h3>Restaurants on Gourmet</h3>
-				<h5>RESTAURANT ID</h5>
-				<input type="text" value="James Thompson" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'James Thompson';}" required="">
 
-				<h5>NAME</h5>
-				<input class="card_logo" type="text" value="2525 2525 2525 2525" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '2525 2525 2525 2525';}" required="">
+<div id='cssmenu'>
+<ul>
+   <li><a href='/Gourmet/Controller'><span>HOME</span></a></li>
+   <li class='active has-sub'><a href='#'><span>RESTAURANT</span></a>
+      <ul>
+         <li class='has-sub'><a href='/Gourmet/findrestaurants'><span>Find Restaurants</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/restaurantcreate'><span>Create Restaurants</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/restaurantupdate'><span>Update Restaurants</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/restaurantdelete'><span>Delete Restaurants</span></a>
+         </li>
+      </ul>
+   </li>
+   <li class='active has-sub'><a href='#'><span>USER</span></a>
+      <ul>
+         <li class='has-sub'><a href='/Gourmet/findusers'><span>Find Users</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/usercreate'><span>Create Users</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/userupdate'><span>Update Users</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/userdelete'><span>Delete Users</span></a>
+         </li>
+      </ul>
+   </li>
+   <li class='active has-sub'><a href='#'><span>REVIEW</span></a>
+      <ul>
+         <li class='has-sub'><a href='/Gourmet/findreviews'><span>Find Reviews</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/reviewcreate'><span>Create Reviews</span></a>
+         </li>
+      </ul>
+   </li>
+</ul>
+</div>
 
-				<h5>ZIP CODE</h5>
-				<select id="country" onchange="change_country(this.value)" class="frm-field required">
-					<option value="null">January</option>
-					<option value="null">February</option>         
-					<option value="AX">March</option>
-					<option value="AX">April</option>
-					<option value="AX">May</option>
-					<option value="AX">June</option>
-					<option value="AX">July</option>
-					<option value="AX">August</option>
-					<option value="AX">September</option>
-					<option value="AX">October</option>
-					<option value="AX">November</option>
-					<option value="AX">December</option>
-				</select>
-				<div class="clear"></div>
-				<h5>PRICE RANGE</h5>
-				<input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" required="">
-				<p>
-				</p>
-				<input type="submit" value="FIND RESTAURANT">
-			</form>
-			<p><span></span>Your information is encrypted.</p>
-		</div>
+<div class="container" >
+ 	<div class="signin" style="top: 45vh" position:relative;>
+	<div style="text-align:center;
+                position:relative;
+                text-transform: uppercase;
+                margin-left : -5vh;
+                top: 25vh;
+                color: #ffffff;
+                font-size: 6vw;
+                font-family: 'HelveticaBold', sans-serif;
+                line-height: 0;">
+        <p>GOURMET</p>
+    </div>
+    
+    <div style=" text-align:center; position: relative; color: #ffffff; font-size: 1.2vw; font-family:'HelveticaRegular'">
+    <br/><br/><br/><br/>
+    	<p>Enjoy Your Trip on Gourmet.</p>
+        <p>Lead a Simple . Fast . Easy Life Style.</p>
+    </div>
+ 
+		<form action="findrestaurants" method="post">
+		<br/><br/><br/><br/><br/><br/>
+	      <p>
+			<a href="/Gourmet/findrestaurants"><input type = "find" value = "Find Restaurants" style= "font-family: 'HelveticaRegular'"></a>
+			<br/><br/>
+		  </p>
+		 <br/>
+		</form>
 	</div>
-	<div class="hotel-left">
-		<div class="hotel-text">
-			<h2>ROYAL PALACE</h2>
-			<h3> $250.00 / <span>night</span></h3>
-			<p>Entire Room for 5 members.</p>
-			<p>Thursday, Dec 10, 2014 to Thursday, Dec 12, 2014.</p>
-		</div>
-	</div>
-	<div class="clear"></div>
-	<p class="footer">&copy; 2015 Hotel Checkout Form. All Rights Reserved | Design by BEE</a></p>
+	<br/>
+	<br/>
+		<div class="footer" style= "color: #ffffff;">
+     <p><h5>Copyright &copy; 2015 Gourmet. All Rights Reserved | Design by BEE</h5></a></p>
+     <br/><br/><br/><br/>
+</div> 
 </div>
 </body>
 </html>

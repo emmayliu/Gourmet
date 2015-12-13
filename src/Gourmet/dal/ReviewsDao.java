@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,7 +44,6 @@ public class ReviewsDao {
 			insertStmt.setString(3, review.getReview());
 			insertStmt.setTimestamp(4, new Timestamp(review.getCreated().getTime()));
 			insertStmt.setFloat(5, review.getRating());
-
 			insertStmt.executeUpdate();
 			
 			// Retrieve the auto-generated key and set it, so it can be used by the caller.
@@ -132,17 +132,24 @@ public class ReviewsDao {
 			selectStmt = connection.prepareStatement(selectReviews);
 			selectStmt.setInt(1,userId);
 			results = selectStmt.executeQuery();
+			System.out.print("Is null? " + results.wasNull());
 			UsersDao usersDao = UsersDao.getInstance();
 			RestaurantsDao restaurantsDao = RestaurantsDao.getInstance();
 			while(results.next()) {
+				System.out.print(" running here " + '\n');
 				int reviewId = results.getInt("ReviewId");
 				int resultuserId = results.getInt("UserId");
 				String restaurantId = results.getString("RestaurantId");
 				String reviewcontext = results.getString("Review");
-				Date created =  new Date(results.getTimestamp("Created").getTime());
+				Date created = null;
+				try {
+					created = new Date(results.getTimestamp("Created").getTime());
+				} catch (SQLException e) {
+					continue;
+				}
 				float rating = results.getFloat("Rating");
 
-				Users user = usersDao.getUserFromUserId(resultuserId);
+				Users user = usersDao.getUserFromUserId(userId);
 				Restaurants restaurant = restaurantsDao.getRestaurantById(restaurantId);
 				Reviews review = new Reviews(reviewId, user, restaurant, reviewcontext, created, rating);
 				reviews.add(review);
@@ -164,7 +171,7 @@ public class ReviewsDao {
 		return reviews;
 	}
 	
-	public List<Reviews> getReviewsByRestaurantId(int restaurantId) throws SQLException {
+	public List<Reviews> getReviewsByRestaurantId(String restaurantId) throws SQLException {
 		List<Reviews> reviews = new ArrayList<Reviews>();
 		String selectReviews =
 				"SELECT ReviewId,UserId,RestaurantId,Review,Created,Rating "
@@ -176,19 +183,25 @@ public class ReviewsDao {
 		try {
 			connection = connectionManager.getConnection();
 			selectStmt = connection.prepareStatement(selectReviews);
-			selectStmt.setInt(1,restaurantId);
+			selectStmt.setString(1,restaurantId);
 			results = selectStmt.executeQuery();
 			UsersDao usersDao = UsersDao.getInstance();
 			RestaurantsDao restaurantsDao = RestaurantsDao.getInstance();
 			while(results.next()) {
 				int reviewId = results.getInt("ReviewId");
-				int resultuserId = results.getInt("UserId");
+				int userId = results.getInt("UserId");
 				String resultrestaurantId = results.getString("RestaurantId");
 				String reviewcontext = results.getString("Review");
-				Date created =  new Date(results.getTimestamp("Created").getTime());
+				Date created = null;
+				try{
+					created =  new Date(results.getTimestamp("Created").getTime());
+				} catch (SQLException e) {
+					continue;
+				}
+				System.out.print("time");
 				float rating = results.getFloat("Rating");
 
-				Users user = usersDao.getUserFromUserId(resultuserId);
+				Users user = usersDao.getUserFromUserId(userId);
 				Restaurants restaurant = restaurantsDao.getRestaurantById(resultrestaurantId);
 				Reviews review = new Reviews(reviewId, user, restaurant, reviewcontext, created, rating);
 				reviews.add(review);

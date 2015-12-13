@@ -55,19 +55,10 @@ public class UserCreate extends HttpServlet {
 		} else {
 			// Create the User.
 			String password = req.getParameter("password");
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String stringCreatedSince = req.getParameter("createdSince");
 			java.util.Date createdSince = new java.util.Date();
 			/*java.sql.Date sqlCreatedSince = new java.sql.Date(createdSince.getTime());
-			try {
-				createdSince = dateFormat.parse(stringCreatedSince);
-				sqlCreatedSince = new java.sql.Date(createdSince.getTime());
-			} catch (ParseException e) {
-				e.printStackTrace();
-				throw new IOException(e);
-			}*/
-			String stringReviewCount = req.getParameter("reviewCount");
-			int reviewCount = Integer.parseInt(stringReviewCount);
+			String stringReviewCount = req.getParameter("reviewCount");*/
+			int reviewCount = 0;
 			
 			String stringGender = req.getParameter("gender");
 			boolean gender = Boolean.parseBoolean(stringGender);

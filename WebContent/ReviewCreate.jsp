@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gourmet Restaurant Delete</title>
+<title>Create a Review of Restaurant</title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/table.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/navigation.css" type="text/css" media="all" />
@@ -60,30 +60,36 @@
 </div>
 
 <div class="container" >
-	<h1>${messages.title}</h1>
+	<h1>CREATE A REVIEW</h1>
 	<div class="signin">
-			<form action="restaurantdelete" method="post">
-		      <p>
-				<div class="pass" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-				<label for="restaurantId"><h5>RESTAURANT ID</h5></label>
-				<input type="text" class="pass" id="restaurantId" name="restaurantId" value="${fn:escapeXml(param.restaurantId)}">
-			   </div>
+		<form action="reviewcreate" method="post">
+			<p>
+				<div class="pass"><label for="username"><h5>USER NAME</h5></label>
+				<input type="text" class="pass" id="username" name="username" value=""></div>
 			</p>
 			<p>
-				<span id="submitButton" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
+				<div class="pass"><label for="restaurantname"><h5>RESTAURANT NAME</h5></label>
+				<input type="text" class="pass" id="restaurantname" name="restaurantname" value=""></div>
+			</p>
+			<p>
+				<div class="pass"><label for="reviewContent"><h5>CONTENT</h5></label>
+				<input type="text" class="pass" id="reviewContent" name="reviewContent" value=""></div>
+			</p>
+			<p>
+				<div class="pass"><label for="rating"><h5>RATING</h5></label>
+				<input type="text" class="pass" id="rating" name="rating" value=""></div>
+			</p>
+			<p>
 				<input type="submit">
-				</span>
-			</p>
-			<p>
+				<br/><br/>
 				<span id = "successMessage"><b>${messages.success}</b></span>
 			</p>
-			</form>	
+		</form>
 	</div>
-	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-</div>
-<div class="footer" style= "color: #ffffff;">
+	
+	<div class="footer" style= "color: #ffffff;">
      <p><h5>Copyright &copy; 2015 Gourmet. All Rights Reserved | Design by BEE</h5></a></p>
+	</div> 
 </div>
-	<br/><br/><br/> 	
 </body>
 </html>

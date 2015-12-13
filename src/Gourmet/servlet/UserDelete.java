@@ -34,7 +34,7 @@ public class UserDelete extends HttpServlet {
 		Map<String, String> messages = new HashMap<String, String>();
 		req.setAttribute("messages", messages);
 		// Provide a title and render the JSP.
-        messages.put("title", "Delete User");        
+        messages.put("title", "DELETE USER");        
         req.getRequestDispatcher("/UserDelete.jsp").forward(req, resp);
 	}
 

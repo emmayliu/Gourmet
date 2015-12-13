@@ -1,5 +1,6 @@
 package Gourmet.servlet;
 
+import java.util.UUID;
 import Gourmet.dal.*;
 import Gourmet.model.*;
 
@@ -53,7 +54,7 @@ public class RestaurantCreate extends HttpServlet{
 			messages.put("success", "Invalid RestaurantName");
 		} else {
 			// Create the Restaurant.
-			String restaurantId = req.getParameter("restaurantId");
+			String restaurantId = java.util.UUID.randomUUID().toString();
 			boolean acceptCreditCard = Boolean.parseBoolean(req.getParameter("acceptCreditCard"));
 			boolean wifi = Boolean.parseBoolean(req.getParameter("wifi"));
 			int priceRange = Integer.parseInt(req.getParameter("priceRange"));

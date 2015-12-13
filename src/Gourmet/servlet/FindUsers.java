@@ -76,9 +76,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp)
 				e.printStackTrace();
 				throw new IOException(e);
 			}
-			
 
-			
 		}
 		req.setAttribute("users",userList);
 		req.getRequestDispatcher("/FindUsers.jsp").forward(req, resp);

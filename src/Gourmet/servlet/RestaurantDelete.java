@@ -31,7 +31,7 @@ public class RestaurantDelete extends HttpServlet {
 		Map<String, String> messages = new HashMap<String, String>();
 		req.setAttribute("messages", messages);
 		// Provide a title and render the JSP.
-        messages.put("title", "Delete Restaurant");        
+        messages.put("title", "DELETE RESTAURANT");        
         req.getRequestDispatcher("/RestaurantDelete.jsp").forward(req, resp);
 	}
 
@@ -55,10 +55,10 @@ public class RestaurantDelete extends HttpServlet {
 	        	restaurant = restaurantsDao.delete(restaurant);
 	        	// Update the message.
 		        if (restaurant == null) {
-		            messages.put("title", "Successfully deleted " + RestaurantId);
+		            messages.put("title", "Successfully deleted " + restaurant.getName() + "("+RestaurantId+")");
 		            messages.put("disableSubmit", "true");
 		        } else {
-		        	messages.put("title", "Failed to delete " + RestaurantId);
+		        	messages.put("title", "Failed to delete " + restaurant.getName() + "("+RestaurantId+")");
 		        	messages.put("disableSubmit", "false");
 		        }
 	        } catch (SQLException e) {

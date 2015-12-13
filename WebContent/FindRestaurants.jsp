@@ -7,36 +7,82 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Gourmet Restaurant Review</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Find Restaurants on Gourmet</title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/table.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/navigation.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/fonts.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/fontFace.css" type="text/css" media="all" />
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="script.js"></script>
 </head>
 <body>
+
+<div id='cssmenu'>
+<ul>
+   <li><a href='/Gourmet/Controller'><span>HOME</span></a></li>
+   <li class='active has-sub'><a href='#'><span>RESTAURANT</span></a>
+      <ul>
+         <li class='has-sub'><a href='/Gourmet/findrestaurants'><span>Find Restaurants</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/restaurantcreate'><span>Create Restaurants</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/restaurantupdate'><span>Update Restaurants</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/restaurantdelete'><span>Delete Restaurants</span></a>
+         </li>
+      </ul>
+   </li>
+   <li class='active has-sub'><a href='#'><span>USER</span></a>
+      <ul>
+         <li class='has-sub'><a href='/Gourmet/findusers'><span>Find Users</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/usercreate'><span>Create Users</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/userupdate'><span>Update Users</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/userdelete'><span>Delete Users</span></a>
+         </li>
+      </ul>
+   </li>
+   <li class='active has-sub'><a href='#'><span>REVIEW</span></a>
+      <ul>
+         <li class='has-sub'><a href='/Gourmet/findreviews'><span>Find Reviews</span></a>
+         </li>
+         <li class='has-sub'><a href='/Gourmet/reviewcreate'><span>Create Reviews</span></a>
+         </li>
+      </ul>
+   </li>
+</ul>
+</div>
+
 <div class="container" >
 	<h1>FIND RESTAURANTS</h1>
 	<div class="signin">
 			<form action="findrestaurants" method="post">
-			 <!--   <p>
+			 <!--  <p>
 				<div class="user"><label for="restaurantId">RESTAURANT ID</label>
 				<input type="text" class="user" id="restaurantId" name= "restaurantId" value= "${fn:escapeXml(param.restaurantId)}" 
 				       onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'XYZ';}"></div>
 			  </p>-->
 		      <p>
-				<div class="pass"><label for="restaurantName">NAME</label>
+				<div class="pass"><label for="restaurantName"><h5>NAME</h5></label>
 				<input type="text" class="pass" id="restaurantName" name= "restaurantName" value= "${fn:escapeXml(param.restaurantName)}"
-				       onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'McDonald\'s';}"></div>
+				      ></div>
 		      </p>
 		      <p>
-				<div class="pass"><label for="zip">ZIP CODE</label>
+				<div class="pass"><label for="zip"><h5>ZIP CODE</h5></label>
 				<input type="text" class="pass" id="zip" name="zip" value="${fn:escapeXml(param.zip)}"
-				       onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '89109';}"></div>
+				      ></div>
 				<div class="clear"></div>
 			  </p>
 		      <p>
-				<div class="user"><label for="priceRange">PRICE RANGE</label>
+				<div class="user"><label for="priceRange"><h5>PRICE RANGE</h5></label>
 				<input type="text" class="user" id="priceRange" name="priceRange" value="${fn:escapeXml(param.priceRange)}"
-				       onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '3';}"></div>
+				      ></div>
 		      </p>
 		      <p>
 				<input type = "submit">
@@ -44,28 +90,30 @@
 				<span id = "successMessage"><b>${messages.success}</b></span>
 			  </p>
 			</form>
-			<div id = "restaurantCreate"><a href="restaurantcreate">Create Restaurant</a></div>
+			<div id = "restaurantCreate"><a href="restaurantcreate"><h5>Create Restaurant</h5></a></div>
 	</div>
 
-	
+	<br/>
 	<div class="table">
 			<table border="1" id ="keywords" cellspacing="0" cellpadding="0">
 			<thead>
 				<tr>
-	                <th>RestaurantName</th>
-	                <th>CreditCard</th>
-	                <th>WIFI</th>
-	                <th>PriceRange</th>
-	                <th>OpenTime</th>
-	                <th>CloseTime</th>
-	                <th>NoiseLevel</th>
-	                <th>Neighborhood</th>
-	                <th>Star</th>
-	                <th>Parking</th>
-	                <th>Street</th>
-	                <th>City</th>
-	                <th>State</th>
-	                <th>ZipCode</th>
+	                <th><h5>Name</h5></th>
+	                <th><h5>CreditCard</h5></th>
+	                <th><h5>WIFI</h5></th>
+	                <th><h5>PriceRange</h5></th>
+	                <th><h5>Open</h5></th>
+	                <th><h5>Close</h5></th>
+	                <th><h5>Noise</h5></th>
+	                <!--<th><h5>Neighborhood</h5></th>-->
+	                <th><h5>Star</h5></th>
+	                <th><h5>Parking</h5></th>
+	                <th><h5>Street</h5></th>
+	                <th><h5>City</h5></th>
+	                <th><h5>State</h5></th>
+	                <th><h5>ZipCode</h5></th>
+	                <th><h5>Delete</h5></th>
+	                <th><h5>Update</h5></th>
 				</tr>
 				</thead>
 				<c:forEach items = "${restaurants}" var = "rest">
@@ -78,7 +126,7 @@
 						<td><fmt:formatDate value="${rest.getOpen()}" pattern="hh:mm:ss"/></td>
 						<td><fmt:formatDate value="${rest.getClose()}" pattern="hh:mm:ss"/></td>
 						<td><c:out value="${rest.getNoiseLevel()}" /></td>
-						<td><c:out value="${rest.getNeighborhood()}" /></td>
+						<!--  <td><c:out value="${rest.getNeighborhood()}" /></td>-->
 						<td><c:out value="${rest.getStar()}" /></td>
 						<td><c:out value="${rest.getParking()}" /></td>
 						<td><c:out value="${rest.getStreet()}" /></td>
@@ -93,7 +141,7 @@
 			</table> 
 		</div> 
 		<div class="footer">
-     <p>Copyright &copy; 2015 Gourmet. All Rights Reserved | Design by BEE</a></p>
+     <p><h5>Copyright &copy; 2015 Gourmet. All Rights Reserved | Design by BEE</h5></a></p>
 </div> 
 </div>
 </body>

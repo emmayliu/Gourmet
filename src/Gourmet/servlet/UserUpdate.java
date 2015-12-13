@@ -86,7 +86,6 @@ public class UserUpdate extends HttpServlet {
         				user = usersDao.updateNameAndPassword(user, newUserName, newPassword);
         				messages.put("success", "Successfully updated " + newUserName);
         			}
-        			
         		}
         		req.setAttribute("user", user);
         	} catch (SQLException e) {

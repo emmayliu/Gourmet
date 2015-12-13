@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gourmet Restaurant Delete</title>
+<title>Gourmet Review Search</title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/table.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/navigation.css" type="text/css" media="all" />
@@ -60,30 +60,59 @@
 </div>
 
 <div class="container" >
-	<h1>${messages.title}</h1>
+	<h1>SEARCH FOR REVIEWS</h1>
 	<div class="signin">
-			<form action="restaurantdelete" method="post">
+			<form action="findreviews" method="post">
 		      <p>
-				<div class="pass" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-				<label for="restaurantId"><h5>RESTAURANT ID</h5></label>
-				<input type="text" class="pass" id="restaurantId" name="restaurantId" value="${fn:escapeXml(param.restaurantId)}">
-			   </div>
-			</p>
-			<p>
-				<span id="submitButton" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-				<input type="submit">
-				</span>
-			</p>
-			<p>
+				<div class="pass"><label for="username"><h5>USER NAME</h5></label>
+				<input type="text" class="pass" id="username" name= "username" value= "${fn:escapeXml(param.username)}"
+				      ></div>
+		      </p>
+		      <p>
+				<div class="pass"><label for="restaurantname"><h5>RESTAURANT NAME</h5></label>
+				<input type="text" class="pass" id="restaurantname" name="restaurantname" value="${fn:escapeXml(param.restaurantname)}"
+				      ></div>
+				<div class="clear"></div>
+			  </p>
+		      <p>
+				<input type = "submit">
+				<br/><br/>
 				<span id = "successMessage"><b>${messages.success}</b></span>
-			</p>
-			</form>	
+			  </p>
+			</form>
+			<div id = "reviewCreate"><a href="reviewcreate"><h5>Create Review</h5></a></div>
 	</div>
-	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-</div>
-<div class="footer" style= "color: #ffffff;">
+
+	<br/>
+	<div class="table">
+			<table border="1" id ="keywords" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+	               <th><h5>ReviewId</h5></th>
+	               <th><h5>User</h5></th>
+	               <th><h5>Restaurant</h5></th>
+	               <th><h5>Review</h5></th>
+	               <th><h5>Created Since</h5></th>
+	               <th><h5>Rating</h5></th>
+				</tr>
+				</thead>
+				<c:forEach items = "${reviews}" var = "review">
+					<tbody>
+					<tr>
+						<td><h5><c:out value="${review.getReviewId()}" /></h5></td>
+						<td><h5><c:out value="${review.getUser().getName()}" /></h5></td>
+						<td><h5><c:out value="${review.getRestaurant().getName()}" /></h5></td>
+						<td><h5><c:out value="${review.getReview()}" /></h5></td>
+						<td><h5><fmt:formatDate value="${review.getCreated()}" pattern="yyyy-MM-dd"/></h5></td>
+						<td><h5><c:out value="${review.getRating()}" /></h5></td> 
+					</tr>
+					</tbody>
+				</c:forEach>
+			</table> 
+		</div> 
+		<div class="footer" style= "color: #ffffff;">
      <p><h5>Copyright &copy; 2015 Gourmet. All Rights Reserved | Design by BEE</h5></a></p>
+</div> 
 </div>
-	<br/><br/><br/> 	
 </body>
 </html>

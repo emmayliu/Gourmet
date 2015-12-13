@@ -117,21 +117,47 @@ input[type="submit"] {
     padding: 10px 0;
     margin-top: 20px;
     outline: none;
-    border: 1px solid #7B7474;
+    border: 1px solid #fff!important;
     font-family: Oswald-Regular;
     font-size: 17px;
     color: #FFFFFF;
-    background-color: rgba(23, 24, 25, 0.24);
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     cursor: pointer;
 }
 input[type="submit"]:hover {
-	background-color: rgba(16, 89, 134, 0.52);
+	background-color: rgba(255, 255, 255, 0.3);
 	-webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
 }
+
+input[type="find"] {
+	text-align: center;
+	display: inline-block;
+    width: 60%;
+    padding: 10px 0;
+    margin-top: 20px;
+    margin-left: 65px;
+    outline: none;
+    border: 1px solid #fff!important;
+    font-family: HelveticaRegular;
+    font-size: 17px;
+    color: #FFFFFF;
+    border: 1px solid #fff!important;
+    background: rgba(255, 255, 255, .1);
+    border-radius: 5px;
+    cursor: pointer;
+}
+input[type="find"]:hover {
+	background: rgba(255, 255, 255, 0.3);
+	-webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
 
 .footer {
     text-align: center;
