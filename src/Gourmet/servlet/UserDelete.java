@@ -51,16 +51,17 @@ public class UserDelete extends HttpServlet {
             messages.put("title", "Invalid UserId");
             messages.put("disableSubmit", "true");
         } else {
-        	// Delete the User.
-	        Users user = new Users(userId);
+        	// Delete the User.     
 	        try {
+	        	Users user = usersDao.getUserFromUserId(userId);
 	        	user = usersDao.delete(user);
+	        	  	
 	        	// Update the message.
 		        if (user == null) {
-		            messages.put("title", "Successfully deleted " + userId + " user");
+		            messages.put("title", "Successfully deleted user " + userId);
 		            messages.put("disableSubmit", "true");
 		        } else {
-		        	messages.put("title", "Failed to delete " + userId + " user");
+		        	messages.put("title", "Failed to delete user" + userId);
 		        	messages.put("disableSubmit", "false");
 		        }
 	        } catch (SQLException e) {

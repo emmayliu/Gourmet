@@ -371,6 +371,60 @@ public class RestaurantsDao {
         return restaurants;
     }
     
+    // Cuisine Type
+    public List<Restaurants> getRestaurantsByCuisine(String cuisine) throws SQLException {
+        List<Restaurants> restaurants = new ArrayList<Restaurants>();
+        String selectRestaurants = "SELECT Restaurants.RestaurantId,RestaurantName,AcceptsCreditCard,WIFI,PriceRange,OpenTime,CloseTime,NoiseLevel,"
+                + "Neighborhood,Star, Parking,Street,City,State,Zipcode "
+                + "FROM Restaurants INNER JOIN Categories ON Restaurants.RestaurantId = Categories.RestaurantId"
+                + " WHERE " + cuisine + " = 1;"; 
+        System.out.print(selectRestaurants);
+
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectRestaurants);
+            results = selectStmt.executeQuery();
+            while(results.next()){
+            String resultRestaurantId = results.getString("RestaurantId");
+            String name = results.getString("RestaurantName");
+            boolean acceptcreditcard = results.getBoolean("AcceptsCreditCard");
+            boolean wifi = results.getBoolean("WIFI");
+            int pricerange = results.getInt("PriceRange");
+            Time open = results.getTime("OpenTime");
+            Time close = results.getTime("CloseTime");
+            int noiselevel = results.getInt("NoiseLevel");
+            String neighborhood = results.getString("Neighborhood");
+            double star = results.getDouble("Star");
+            int parking = results.getInt("Parking");            
+            String street = results.getString("Street");
+            String city = results.getString("City");
+            String state = results.getString("State");
+            int zip = results.getInt("Zipcode");
+            Restaurants restaurant = new Restaurants(resultRestaurantId, name, acceptcreditcard,wifi,pricerange,open,close,
+                    noiselevel,neighborhood,star,parking,street,city,state,zip);
+                restaurants.add(restaurant);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if(connection != null) {
+                connection.close();
+            }
+            if(selectStmt != null) {
+                selectStmt.close();
+            }
+            if(results != null) {
+                results.close();
+            }
+        }
+        return restaurants;
+    }    
+    
     // update star
 public Restaurants updateStar(Restaurants restaurant, Double newStar) throws SQLException {
     String updateStar = "UPDATE Restaurants SET Star=?  WHERE RestaurantId=?;";

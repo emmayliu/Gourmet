@@ -85,6 +85,31 @@
 				      ></div>
 		      </p>
 		      <p>
+			<div class="custom-select" style= "color: #ffffff"><label for="cuisineType"><h5>CUISINE TYPE</h5></label>
+			</br>
+			<select class="custom-select" name="cuisineType">
+				<option value="" disabled selected>Choose cuisine option</option>
+				<option value="Bars"><h5>Bars</h5></option>
+				<option value="Mexican"><h5>Mexican</h5></option>
+				<option value="Chinese"><h5>Chinese</h5></option>
+				<option value="AmericanNew"><h5>AmericanNew</h5></option>
+				<option value="AmericanTraditional"><h5>AmericanTraditional</h5></option>
+				<option value="Sandwiches"><h5>Sandwiches</h5></option>
+				<option value="Seafood"><h5>Seafood</h5></option>
+				<option value="Buffets"><h5>Buffets</h5></option>
+				<option value="Greek"><h5>Greek</h5></option>
+				<option value="Indian"><h5>Indian</h5></option>
+				<option value="SteakHouse"><h5>SteakHouse</h5></option>
+				<option value="Nightlife"><h5>Nightlife</h5></option>
+				<option value="Korean"><h5>Korean</h5></option>
+				<option value="Pizza"><h5>Pizza</h5></option>
+				<option value="Thai"><h5>Thai</h5></option>
+				<option value="Italian"><h5>Italian</h5></option>
+			</select>
+		    </div>
+		    </p>
+		    </br>
+		      <p>
 				<input type = "submit">
 				<br/><br/>
 				<span id = "successMessage"><b>${messages.success}</b></span>
@@ -140,7 +165,7 @@
 				</c:forEach>
 			</table> 
 		</div> 
-		<div class="footer">
+		<div class="footer" style= "color: #ffffff;">
      <p><h5>Copyright &copy; 2015 Gourmet. All Rights Reserved | Design by BEE</h5></a></p>
 </div> 
 </div>

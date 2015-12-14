@@ -52,6 +52,7 @@ public class FindRestaurants extends HttpServlet{
 		String name = req.getParameter("restaurantName");
 		String zipcode = req.getParameter("zip");
 		String priceRange = req.getParameter("priceRange");
+		String cuisineType = req.getParameter("cuisineType");
 		
 		if(rid != null && !rid.trim().isEmpty()) {
 			// Retrieve Restaurants, and store as a message.
@@ -63,7 +64,7 @@ public class FindRestaurants extends HttpServlet{
 			
 			req.setAttribute("restaurants", restaurantList);
 			
-		}else if(name != null && !name.trim().isEmpty()) {
+		} else if(name != null && !name.trim().isEmpty()) {
 			// Retrieve Restaurants, and store as a message.
 			try {
 				restaurantList = restaurantsDao.getRestaurantByName(name);
@@ -74,7 +75,7 @@ public class FindRestaurants extends HttpServlet{
 
 			req.setAttribute("restaurants", restaurantList);
 			
-		} else if(zipcode != null && !zipcode.trim().isEmpty()){
+		}  else if(zipcode != null && !zipcode.trim().isEmpty()){
 			int zip = Integer.parseInt(zipcode);
 			// Retrieve Restaurants, and store as a message.
 			try {
@@ -89,6 +90,16 @@ public class FindRestaurants extends HttpServlet{
 			int price = Integer.parseInt(priceRange);
 			try {
 				restaurantList = restaurantsDao.getRestaurantsByPriceRange(price);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new IOException(e);
+			}
+
+			req.setAttribute("restaurants", restaurantList);
+			
+		} else if(cuisineType != null && !cuisineType.trim().isEmpty()){
+			try {
+				restaurantList = restaurantsDao.getRestaurantsByCuisine(cuisineType);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);

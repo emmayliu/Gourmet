@@ -50,19 +50,19 @@ public class UserCreate extends HttpServlet {
 		
 		// Retrieve and validate name.
 		String name = req.getParameter("username");
-		if(name == null || name.trim().isEmpty()){
-			messages.put("success", "Invalid UserName");
+		String password = req.getParameter("password");
+		String stringGender = req.getParameter("gender");
+		
+		if(name == null || name.trim().isEmpty() || password == null || password.trim().isEmpty()
+				|| stringGender == null || stringGender.isEmpty()){
+			messages.put("success", "Invalid UserName or Password.");
 		} else {
 			// Create the User.
-			String password = req.getParameter("password");
+			boolean gender = Boolean.parseBoolean(stringGender);
 			java.util.Date createdSince = new java.util.Date();
 			/*java.sql.Date sqlCreatedSince = new java.sql.Date(createdSince.getTime());
 			String stringReviewCount = req.getParameter("reviewCount");*/
 			int reviewCount = 0;
-			
-			String stringGender = req.getParameter("gender");
-			boolean gender = Boolean.parseBoolean(stringGender);
-			
 			try {
 				Users user = new Users(name,password,new java.sql.Date(createdSince.getTime()),reviewCount,gender);
 				user = usersDao.create(user);
