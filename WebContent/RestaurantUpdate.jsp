@@ -74,7 +74,7 @@
 		      <p>
 				<input type = "submit">
 				<br/><br/>
-				<span id = "successMessage"><b>${messages.success}</b></span>
+				<span id = "successMessage"><b><h5>${messages.success}</h5></b></span>
 			  </p>
 			</form>
 			</br></br>
