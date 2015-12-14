@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RestaurantsDao {
     protected ConnectionManager connectionManager;
@@ -160,6 +161,83 @@ public class RestaurantsDao {
             }
         }
         return null;
+    }
+    
+    public List<Restaurants> getRestaurantByCriteria(Map<String, String> criteria) throws SQLException {
+    	 List<Restaurants> restaurantList = new ArrayList<Restaurants>();
+    	 String base = "SELECT Restaurants.RestaurantId,RestaurantName,AcceptsCreditCard,WIFI,PriceRange,OpenTime,CloseTime,NoiseLevel,"
+                 + "Neighborhood, Star, Parking,Street,City,State,Zipcode "
+                 + "FROM ((Restaurants inner join Categories on Restaurants.RestaurantId = Categories.RestaurantId) "
+                 + " inner join GoodFor on Restaurants.RestaurantId = GoodFor.RestaurantId)"
+                 + " WHERE ";
+    	 String restrictionsSubQuery = "";
+    	 boolean isValid = false;
+    	 for (String col : criteria.keySet()) {
+    		 if(criteria.get(col) != null && !criteria.get(col).isEmpty()) {
+    			 isValid = true;
+    			 String value = criteria.get(col);
+    			 if (!col.equals("priceRange")) {
+    				 value = "'" + value + "'";
+    			 }
+    			 
+    			 if(col.equals("cuisineType") || col.equals("goodFor")) {
+    				 restrictionsSubQuery += criteria.get(col) + "=1 and ";
+    			 } else {
+    				 restrictionsSubQuery += col + "=" +  value + " and ";
+    			 }
+    		 }
+    	 }
+    	 if (isValid = false) {
+    		 return null;
+    	 }
+    	 restrictionsSubQuery = restrictionsSubQuery.substring(0, restrictionsSubQuery.length() - 4);
+    	 String query = base + restrictionsSubQuery + ';';
+    	 System.out.print(query);
+    	 
+
+    	 Connection connection = null;
+         PreparedStatement selectStmt = null;
+         ResultSet results = null;
+         try {
+             connection = connectionManager.getConnection();
+             selectStmt = connection.prepareStatement(query);   
+             results = selectStmt.executeQuery();
+         
+             while(results.next()) {
+                 String restaurantId = results.getString("RestaurantId");
+                 String resultRestaurantName = results.getString("RestaurantName");
+                 boolean acceptcreditcard = results.getBoolean("AcceptsCreditCard");
+                 boolean wifi = results.getBoolean("WIFI");
+                 int pricerange = results.getInt("PriceRange");
+                 Time open = results.getTime("OpenTime");
+                 Time close = results.getTime("CloseTime");
+                 int noiselevel = results.getInt("NoiseLevel");
+                 String neighborhood = results.getString("Neighborhood");
+                 double star = results.getDouble("Star");
+                 int parking = results.getInt("Parking");            
+                 String street = results.getString("Street");
+                 String city = results.getString("City");
+                 String state = results.getString("State");
+                 int zip = results.getInt("Zipcode");
+                 Restaurants restaurant = new Restaurants(restaurantId, resultRestaurantName, acceptcreditcard,wifi,pricerange,
+                         open,close,noiselevel,neighborhood,star,parking,street,city,state,zip);
+                 restaurantList.add(restaurant);
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+             throw e;
+         } finally {
+             if(connection != null) {
+                 connection.close();
+             }
+             if(selectStmt != null) {
+                 selectStmt.close();
+             }
+             if(results != null) {
+                 results.close();
+             }
+         }
+         return restaurantList;
     }
     
     public List<Restaurants> getRestaurantByName(String restaurantName) throws SQLException {

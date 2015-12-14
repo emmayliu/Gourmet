@@ -54,7 +54,26 @@ public class FindRestaurants extends HttpServlet{
 		String priceRange = req.getParameter("priceRange");
 		String cuisineType = req.getParameter("cuisineType");
 		String goodFor = req.getParameter("goodFor");
+		Map<String, String> criteria = new HashMap<>();
+		criteria.put("restaurantid", rid);
+		criteria.put("restaurantname", name);
+		criteria.put("city", city);
+		criteria.put("priceRange", priceRange);
+
+		criteria.put("cuisineType", cuisineType);
+		criteria.put("goodFor", goodFor);
+
 		
+		System.out.print( "Name is:" + name);
+		try {
+			restaurantList = restaurantsDao.getRestaurantByCriteria(criteria);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		req.setAttribute("restaurants", restaurantList);
+		/*
 		if(rid != null && !rid.trim().isEmpty()) {
 			// Retrieve Restaurants, and store as a message.
 			try {
@@ -76,47 +95,7 @@ public class FindRestaurants extends HttpServlet{
 
 			req.setAttribute("restaurants", restaurantList);
 			
-		}  else if(city != null && !city.trim().isEmpty()){
-			try {
-				restaurantList = restaurantsDao.getRestaurantsByCity(city);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new IOException(e);
-			}
-			req.setAttribute("restaurants", restaurantList);
-			
-		}  else if(priceRange != null && !priceRange.trim().isEmpty()){
-			int price = Integer.parseInt(priceRange);
-			try {
-				restaurantList = restaurantsDao.getRestaurantsByPriceRange(price);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new IOException(e);
-			}
-
-			req.setAttribute("restaurants", restaurantList);
-			
-		} else if(cuisineType != null && !cuisineType.trim().isEmpty()){
-			try {
-				restaurantList = restaurantsDao.getRestaurantsByCuisine(cuisineType);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new IOException(e);
-			}
-
-			req.setAttribute("restaurants", restaurantList);
-			
-		} else if(goodFor != null && !goodFor.trim().isEmpty()){
-			try {
-				restaurantList = restaurantsDao.getRestaurantsByGoodFor(goodFor);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new IOException(e);
-			}
-
-			req.setAttribute("restaurants", restaurantList);
-			
-		}
+		}*/
 		req.getRequestDispatcher("/FindRestaurants.jsp").forward(req, resp);
 	}
 }
