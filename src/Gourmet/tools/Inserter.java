@@ -11,8 +11,6 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
-
-
 public class Inserter {
 
     public static void main(String[] args) throws SQLException {
@@ -36,7 +34,6 @@ public class Inserter {
         ReservationsDao reservationDao = ReservationsDao.getInstance();
         GoodForDao goodForDao = GoodForDao.getInstance();
         CategoriesDao categoriesDao = CategoriesDao.getInstance();
-        CheckInDao checkInDao = CheckInDao.getInstance();
         
         // INSERT objects from our model.
         Users user0 = new Users("jeff","888111888", yesterdayDate, 0, true);
@@ -84,8 +81,6 @@ public class Inserter {
         		,true,true,true,true);
         cg0 = categoriesDao.create(cg0);
         
-        CheckIn ck0 = new CheckIn("88888aaaaa", 100, 100, 100, 100, 100, 100, 100);
-        ck0 = checkInDao.create(ck0);
         
         // READ.
         Users u0 = usersDao.getUserFromUserId(6);
@@ -164,13 +159,7 @@ public class Inserter {
         // restaurantsDao.delete(restaurant0);
        //  restaurantsDao.delete(rs0);
         deliveryDao.delete(dr1);
-        takeOutDao.delete(to0);
-        
-
-  
-
-
-        
+        takeOutDao.delete(to0); 
         
     }
 }

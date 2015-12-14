@@ -179,6 +179,7 @@ public class ReviewsDao {
 						+ "WHERE RestaurantId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
+		System.out.print(selectReviews);
 		ResultSet results = null;
 		try {
 			connection = connectionManager.getConnection();

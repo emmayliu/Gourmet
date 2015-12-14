@@ -398,18 +398,18 @@ public class RestaurantsDao {
         return restaurants;
     }
     
-    public List<Restaurants> getRestaurantsByZip(int zipcode) throws SQLException {
+    public List<Restaurants> getRestaurantsByStar(double selectedstar) throws SQLException {
         List<Restaurants> restaurants = new ArrayList<Restaurants>();
         String selectRestaurants = "SELECT RestaurantId,RestaurantName,AcceptsCreditCard,WIFI,PriceRange,OpenTime,CloseTime,NoiseLevel,"
                 + "Neighborhood,Star, Parking,Street,City,State,Zipcode "
-                + "FROM Restaurants WHERE Zipcode=?;";
+                + "FROM Restaurants WHERE Star >= ?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectRestaurants);
-            selectStmt.setInt(1, zipcode);
+            selectStmt.setDouble(1, selectedstar);
             results = selectStmt.executeQuery();
             while(results.next()){
             String resultRestaurantId = results.getString("RestaurantId");

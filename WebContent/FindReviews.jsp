@@ -74,6 +74,12 @@
 				      ></div>
 				<div class="clear"></div>
 			  </p>
+			  <p>
+				<div class="pass"><label for="restaurantid"><h5>RESTAURANT ID</h5></label>
+				<input type="text" class="pass" id="restaurantid" name="restaurantid" value="${fn:escapeXml(param.restaurantid)}"
+				      ></div>
+				<div class="clear"></div>
+			  </p>
 		      <p>
 				<input type = "submit">
 				<br/><br/>

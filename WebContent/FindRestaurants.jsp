@@ -63,27 +63,50 @@
 	<h1>FIND RESTAURANTS</h1>
 	<div class="signin">
 			<form action="findrestaurants" method="post">
-			 <!--  <p>
-				<div class="user"><label for="restaurantId">RESTAURANT ID</label>
-				<input type="text" class="user" id="restaurantId" name= "restaurantId" value= "${fn:escapeXml(param.restaurantId)}" 
-				       onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'XYZ';}"></div>
-			  </p>-->
+			  <p>
+				<div class="user"><label for="restaurantId"><h5>RESTAURANT ID</h5></label>
+				<input type="text" class="user" id="restaurantId" name= "restaurantId" value= "${fn:escapeXml(param.restaurantId)}" ></div>
+			  </p>
 		      <p>
 				<div class="pass"><label for="restaurantName"><h5>NAME</h5></label>
 				<input type="text" class="pass" id="restaurantName" name= "restaurantName" value= "${fn:escapeXml(param.restaurantName)}"
 				      ></div>
 		      </p>
 		      <p>
-				<div class="pass"><label for="city"><h5>CITY</h5></label>
-				<input type="text" class="pass" id="city" name="city" value="${fn:escapeXml(param.city)}"
-				      ></div>
-				<div class="clear"></div>
-			  </p>
-		      <p>
 				<div class="user"><label for="priceRange"><h5>PRICE RANGE</h5></label>
 				<input type="text" class="user" id="priceRange" name="priceRange" value="${fn:escapeXml(param.priceRange)}"
 				      ></div>
 		      </p>
+		      <p>
+				<div class="user"><label for="star"><h5>STAR</h5></label>
+				<input type="text" class="user" id="star" name="star" value="${fn:escapeXml(param.star)}"
+				      ></div>
+		      </p>
+			<p>
+			<div class="pass" style= "color: #ffffff"><label for="city"><h5>CITY</h5></label>
+			</br>
+			<select class="custom-select" name="city">
+				<option value="" disabled selected>Choose City</option>
+				<option value="Phoenix"><h5>Phoenix</h5></option>
+				<option value="Edinburgh"><h5>Edinburgh</h5></option>
+				<option value="Charlotte"><h5>Charlotte</h5></option>
+				<option value="Las Vegas"><h5>Las Vegas</h5></option>
+				<option value="Pittsburgh"><h5>Pittsburgh</h5></option>
+				<option value="Madison"><h5>Madison</h5></option>
+				<option value="Montreal"><h5>Montreal</h5></option>
+				<option value="Mesa"><h5>Mesa</h5></option>
+				<option value="Gilbert"><h5>Gilbert</h5></option>
+				<option value="Scottsdale"><h5>Scottsdale</h5></option>
+				<option value="Musselburgh"><h5>Musselburgh</h5></option>
+				<option value="Karlsruhe"><h5>Karlsruhe</h5></option>
+				<option value="Tempe"><h5>Tempe</h5></option>
+				<option value="Henderson"><h5>Henderson</h5></option>
+				<option value="Buckeye"><h5>Buckeye</h5></option>
+				<option value="Verdun"><h5>Verdun</h5></option>
+			</select>
+		    </div>
+		    </p>
+		    </br>
 		    <p>
 			<div class="pass" style= "color: #ffffff"><label for="cuisineType"><h5>CUISINE TYPE</h5></label>
 			</br>

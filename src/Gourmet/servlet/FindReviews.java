@@ -95,6 +95,7 @@ public class FindReviews extends HttpServlet{
 		// Retrieve and validate name.
         String userName = req.getParameter("username");
 		String restaurantName = req.getParameter("restaurantname");
+		String restaurantId = req.getParameter("restaurantid");
 	
 		List<Users> userList = new ArrayList<Users>();
 		List<Restaurants> restaurantList = new ArrayList<Restaurants>();
@@ -107,19 +108,7 @@ public class FindReviews extends HttpServlet{
 			throw new IOException(e);
 		}
 		
-		
-		if(restaurantName != null && !restaurantName.trim().isEmpty()) {
-			for(Restaurants rest : restaurantList){
-				String restId = rest.getRestaurantId();
-				System.out.println(" rId:" + restId);
-				try {
-					reviewList.addAll(reviewsDao.getReviewsByRestaurantId(restId));
-				} catch (SQLException e) {
-					continue;
-				}
-			}
-			req.setAttribute("reviews", reviewList);
-		}else if(userName != null && !userName.trim().isEmpty()) {
+		if(userName != null && !userName.trim().isEmpty()) {
 			for (Users user : userList) {
 				int userId = user.getUserId();
 				try {
@@ -130,7 +119,27 @@ public class FindReviews extends HttpServlet{
 				}
 			}
 			req.setAttribute("reviews", reviewList);
-		} 
+		}else if(restaurantName != null && !restaurantName.trim().isEmpty()) {
+			for(Restaurants rest : restaurantList){
+				String restId = rest.getRestaurantId();
+				System.out.println(" rId:" + restId);
+				try {
+					reviewList.addAll(reviewsDao.getReviewsByRestaurantId(restId));
+				} catch (SQLException e) {
+					continue;
+				}
+			}
+			req.setAttribute("reviews", reviewList);
+		}else if(restaurantId != null && !restaurantId.trim().isEmpty()) {
+			System.out.println(restaurantId);
+			try {
+				reviewList.addAll(reviewsDao.getReviewsByRestaurantId(restaurantId));
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new IOException(e);
+			}
+			req.setAttribute("reviews", reviewList);
+		}  
 		req.getRequestDispatcher("/FindReviews.jsp").forward(req, resp);
 	}
 }
