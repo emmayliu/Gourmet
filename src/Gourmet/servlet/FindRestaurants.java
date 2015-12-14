@@ -50,9 +50,10 @@ public class FindRestaurants extends HttpServlet{
 		// Retrieve and validate name.
 		String rid = req.getParameter("restaurantId");
 		String name = req.getParameter("restaurantName");
-		String zipcode = req.getParameter("zip");
+		String city = req.getParameter("city");
 		String priceRange = req.getParameter("priceRange");
 		String cuisineType = req.getParameter("cuisineType");
+		String goodFor = req.getParameter("goodFor");
 		
 		if(rid != null && !rid.trim().isEmpty()) {
 			// Retrieve Restaurants, and store as a message.
@@ -75,18 +76,16 @@ public class FindRestaurants extends HttpServlet{
 
 			req.setAttribute("restaurants", restaurantList);
 			
-		}  else if(zipcode != null && !zipcode.trim().isEmpty()){
-			int zip = Integer.parseInt(zipcode);
-			// Retrieve Restaurants, and store as a message.
+		}  else if(city != null && !city.trim().isEmpty()){
 			try {
-				restaurantList = restaurantsDao.getRestaurantsByZip(zip);
+				restaurantList = restaurantsDao.getRestaurantsByCity(city);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
 			}
 			req.setAttribute("restaurants", restaurantList);
 			
-		} else if(priceRange != null && !priceRange.trim().isEmpty()){
+		}  else if(priceRange != null && !priceRange.trim().isEmpty()){
 			int price = Integer.parseInt(priceRange);
 			try {
 				restaurantList = restaurantsDao.getRestaurantsByPriceRange(price);
@@ -100,6 +99,16 @@ public class FindRestaurants extends HttpServlet{
 		} else if(cuisineType != null && !cuisineType.trim().isEmpty()){
 			try {
 				restaurantList = restaurantsDao.getRestaurantsByCuisine(cuisineType);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new IOException(e);
+			}
+
+			req.setAttribute("restaurants", restaurantList);
+			
+		} else if(goodFor != null && !goodFor.trim().isEmpty()){
+			try {
+				restaurantList = restaurantsDao.getRestaurantsByGoodFor(goodFor);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);

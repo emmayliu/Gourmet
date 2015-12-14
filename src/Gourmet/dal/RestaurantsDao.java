@@ -269,22 +269,22 @@ public class RestaurantsDao {
         return restaurants;
     }
 
-    public List<Restaurants> getRestaurantsByNoiseLevel(int NL) throws SQLException {
+    public List<Restaurants> getRestaurantsByCity(String ct) throws SQLException {
         List<Restaurants> restaurants = new ArrayList<Restaurants>();
-        String selectRestaurants = "SELECT RestaurantId,Name,AcceptsCreditCard,WIFI,PriceRange,OpenTime,CloseTime,NoiseLevel,"
+        String selectRestaurants = "SELECT RestaurantId,RestaurantName,AcceptsCreditCard,WIFI,PriceRange,OpenTime,CloseTime,NoiseLevel,"
                 + "Neighborhood,Star, Parking,Street,City,State,Zipcode "
-                + "FROM Restaurants WHERE NoiseLevel<=?;";
+                + "FROM Restaurants WHERE city=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectRestaurants);
-            selectStmt.setInt(1, NL);
+            selectStmt.setString(1, ct);
             results = selectStmt.executeQuery();
             while(results.next()){
             String resultRestaurantId = results.getString("RestaurantId");
-            String name = results.getString("Name");
+            String name = results.getString("RestaurantName");
             boolean acceptcreditcard = results.getBoolean("AcceptsCreditCard");
             boolean wifi = results.getBoolean("WIFI");
             int pricerange = results.getInt("PriceRange");
@@ -378,6 +378,60 @@ public class RestaurantsDao {
                 + "Neighborhood,Star, Parking,Street,City,State,Zipcode "
                 + "FROM Restaurants INNER JOIN Categories ON Restaurants.RestaurantId = Categories.RestaurantId"
                 + " WHERE " + cuisine + " = 1;"; 
+        System.out.print(selectRestaurants);
+
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectRestaurants);
+            results = selectStmt.executeQuery();
+            while(results.next()){
+            String resultRestaurantId = results.getString("RestaurantId");
+            String name = results.getString("RestaurantName");
+            boolean acceptcreditcard = results.getBoolean("AcceptsCreditCard");
+            boolean wifi = results.getBoolean("WIFI");
+            int pricerange = results.getInt("PriceRange");
+            Time open = results.getTime("OpenTime");
+            Time close = results.getTime("CloseTime");
+            int noiselevel = results.getInt("NoiseLevel");
+            String neighborhood = results.getString("Neighborhood");
+            double star = results.getDouble("Star");
+            int parking = results.getInt("Parking");            
+            String street = results.getString("Street");
+            String city = results.getString("City");
+            String state = results.getString("State");
+            int zip = results.getInt("Zipcode");
+            Restaurants restaurant = new Restaurants(resultRestaurantId, name, acceptcreditcard,wifi,pricerange,open,close,
+                    noiselevel,neighborhood,star,parking,street,city,state,zip);
+                restaurants.add(restaurant);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if(connection != null) {
+                connection.close();
+            }
+            if(selectStmt != null) {
+                selectStmt.close();
+            }
+            if(results != null) {
+                results.close();
+            }
+        }
+        return restaurants;
+    } 
+    
+ // Good For
+    public List<Restaurants> getRestaurantsByGoodFor(String goodFor) throws SQLException {
+        List<Restaurants> restaurants = new ArrayList<Restaurants>();
+        String selectRestaurants = "SELECT Restaurants.RestaurantId,RestaurantName,AcceptsCreditCard,WIFI,PriceRange,OpenTime,CloseTime,NoiseLevel,"
+                + "Neighborhood,Star, Parking,Street,City,State,Zipcode "
+                + "FROM Restaurants INNER JOIN GoodFor ON Restaurants.RestaurantId = GoodFor.RestaurantId"
+                + " WHERE " + goodFor + " = 1;"; 
         System.out.print(selectRestaurants);
 
         Connection connection = null;

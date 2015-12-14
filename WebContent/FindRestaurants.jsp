@@ -74,8 +74,8 @@
 				      ></div>
 		      </p>
 		      <p>
-				<div class="pass"><label for="zip"><h5>ZIP CODE</h5></label>
-				<input type="text" class="pass" id="zip" name="zip" value="${fn:escapeXml(param.zip)}"
+				<div class="pass"><label for="city"><h5>CITY</h5></label>
+				<input type="text" class="pass" id="city" name="city" value="${fn:escapeXml(param.city)}"
 				      ></div>
 				<div class="clear"></div>
 			  </p>
@@ -84,11 +84,11 @@
 				<input type="text" class="user" id="priceRange" name="priceRange" value="${fn:escapeXml(param.priceRange)}"
 				      ></div>
 		      </p>
-		      <p>
-			<div class="custom-select" style= "color: #ffffff"><label for="cuisineType"><h5>CUISINE TYPE</h5></label>
+		    <p>
+			<div class="pass" style= "color: #ffffff"><label for="cuisineType"><h5>CUISINE TYPE</h5></label>
 			</br>
 			<select class="custom-select" name="cuisineType">
-				<option value="" disabled selected>Choose cuisine option</option>
+				<option value="" disabled selected>Choose Cuisine Type</option>
 				<option value="Bars"><h5>Bars</h5></option>
 				<option value="Mexican"><h5>Mexican</h5></option>
 				<option value="Chinese"><h5>Chinese</h5></option>
@@ -109,6 +109,23 @@
 		    </div>
 		    </p>
 		    </br>
+		    <p>
+			<div class="pass" style= "color: #ffffff"><label for="goodFor"><h5>GOOD FOR</h5></label>
+			</br>
+			<select class="custom-select" name="goodFor">
+				<option value="" disabled selected>Choose Good For</option>
+				<option value="GoodForBrunch"><h5>Brunch</h5></option>
+				<option value="GoodForDinner"><h5>Dinner</h5></option>
+				<option value="GoodForBreakfast"><h5>Breakfast</h5></option>
+				<option value="GoodForLunch"><h5>Lunch</h5></option>
+				<option value="GoodForDessert"><h5>Dessert</h5></option>
+				<option value="GoodForLateNight"><h5>LateNight</h5></option>
+				<option value="GoodForKids"><h5>Kids</h5></option>
+				<option value="GoodForGroups"><h5>Groups</h5></option>
+			</select>
+		    </div>
+		    </p>
+		    
 		      <p>
 				<input type = "submit">
 				<br/><br/>
